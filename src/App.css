@@ -1,38 +1,201 @@
-.App {
-  text-align: center;
+* {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+    background: #eee;
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Website Header */
+.header {
+    text-align: center;
+    font-weight: 300;
+    font-size: 30px;
+    color: #999;
+    margin: 50px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* Watch Container */
+.watch-container {
+    width: 300px;
+    margin: 50px auto;
 }
 
-.App-link {
-  color: #61dafb;
+/* Watch */
+.watch {
+    position: relative;
+    width: 300px;
+    height: 300px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Watch Face */
+.watch-face {
+    width: 300px;
+    height: 300px;
+    border-radius: 100%;
+    background: #3F484A; /* Dial colour */
+    border: 10px solid silver; /* Face border */
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5), 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Watch Face Outline */
+.watch-face-outline {}
+
+.watch-face-outline-point {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #777;
+    left: 145px;
+    top: 24px;
+    border-radius: 100%;
+    -webkit-transform-origin: 50% 126px;
+    transform-origin: 50% 126px;
+}
+
+
+/* Watch Face Date */
+.watch-face-date {
+    position: absolute;
+    background-color: rgba(0,0,0,0.1);
+    width: 27px;
+    height: 27px;
+    border-radius: 100%;
+    text-align: center;
+    top: 138px;
+    right: 50px;
+    font-size: 15px;
+    line-height: 27px;
+    color: #aaa;
+    font-weight: 300;
+}
+
+/* Watch Face Center */
+.watch-face-centre {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    top: 144px;
+    left: 144px;
+    border-radius: 100%;
+    background: #fff;
+}
+
+.watch-face-centre-inner {
+    position: absolute;
+    z-index: 1;
+    width: 8px;
+    height: 8px;
+    top: 2px;
+    left: 2px;
+    border-radius: 100%;
+    background: #333;
+    border: 2px solid #fa9f22;
+}
+
+/* Watch Face Hands */
+.watch-face-hands {}
+
+.watch-face-hand {
+    position: absolute;
+}
+
+.watch-face-hand.hour {
+    width: 4px;
+    height: 60px;
+    top: 90px;
+    left: 148px;
+    border-radius: 10px;
+    background: #fff;
+    -webkit-transform-origin: 50% 100%;
+    transform-origin: 50% 100%;
+    -webkit-transform: rotate(306deg);
+    transform: rotate(306deg);
+}
+
+.watch-face-hand.minute {
+    width: 4px;
+    height: 120px;
+    top: 30px;
+    left: 148px;
+    border-radius: 10px;
+    background: #fff;
+    -webkit-transform-origin: 50% 100%;
+    transform-origin: 50% 100%;
+    -webkit-transform: rotate(50deg);
+    transform: rotate(50deg);
+}
+
+.watch-face-hand.second {
+    width: 2px;
+    height: 145px;
+    top: 20px;
+    left: 149px;
+    border-radius: 10px;
+    background: #fa9f22;
+    -webkit-transform-origin: 50% 130px;
+    transform-origin: 50% 130px;
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.watch-container
+{
+    display:flex;
+    align-content:space-between;
+    width:70%;
+    flex-wrap:wrap;
+
+}
+.watch-item
+{
+    margin:20px;
+}
+
+.watch-item h3
+{
+    padding:10px;
+}
+
+.watch-item button:before {
+    content: ' \25CF';
+    font-size: 35px;
+    color: #c1c1c1;
+    position: absolute;
+    top: -15px;
+    left: -2px;
+}
+
+.watch-item button:after {
+    content: '✖';
+    font-size: 9px;
+    color: #F1F1F1;
+    left: 5px;
+    position: absolute;
+    top: 4px;
+    font-weight: bold;
+}
+
+
+.watch-item button {
+
+    color: white;
+    top: -100%;
+    right: -95%;
+    position: relative;
+    display: block;
+    /*  z-index:100000;*/
+    background: none;
+    border: none;
+
 }
