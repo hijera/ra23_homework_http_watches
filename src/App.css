@@ -159,7 +159,7 @@ body {
 }
 .watch-item
 {
-    margin:20px;
+    margin:auto;
 }
 
 .watch-item h3
@@ -190,12 +190,45 @@ body {
 .watch-item button {
 
     color: white;
-    top: -100%;
-    right: -95%;
+    top: -320px;
+    right: -90%;
     position: relative;
     display: block;
     /*  z-index:100000;*/
     background: none;
     border: none;
 
+}
+
+.add-form
+{
+    width:70%;
+    margin:0 auto;
+    margin-top:50px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-form input
+{
+    display:block;
+    height:30px;
+    font-size:24px;
+    vertical-align:middle;
+}
+
+.add-form .form-field
+{
+    display:inline-block;
+    margin:20px;
+}
+.add-form  button
+{
+    padding:5px;
+    display:block;
+}
+.watch-element
+{
+    margin:10px;
 }

@@ -1,7 +1,5 @@
 import React from 'react';
-
 import './App.css';
-
 import WatchApp from "./components/WatchApp";
 
 function App() {

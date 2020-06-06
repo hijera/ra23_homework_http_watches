@@ -2,10 +2,11 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 
 WatchForm.propTypes = {
-
+    onAdd: PropTypes.func.isRequired
 };
 
 function WatchForm(props) {
+    const { onAdd } = props;
     const [form,setForm] = useState({
         name:'',
         timezone:'',
@@ -31,7 +32,6 @@ function WatchForm(props) {
         timezone:numHandler,
     };
 
-
     const onFormChange = evt => {
         const { target }= evt;
         if (!handlers[target.name] || (handlers[target.name] && handlers[target.name](target.value)))
@@ -39,15 +39,24 @@ function WatchForm(props) {
     };
     const onSubmit = evt => {
         evt.preventDefault();
-        console.log(evt.target);
-        props.onAdd(form);
-    }
+        onAdd(form);
+    };
+
     return (
         <div>
-            <form onSubmit={onSubmit} >
-                <input name="name" value={form.name} onChange={onFormChange} />
-                <input name="timezone" value={form.timezone} onChange={onFormChange} />
-                <button>Добавить</button>
+            <form className="add-form" onSubmit={onSubmit} >
+                <div className="form-field">
+                    <label htmlFor="name">Название</label>
+                    <input name="name" value={form.name} onChange={onFormChange} />
+                </div>
+                <div className="form-field">
+                    <label htmlFor="timezone">Временная зона</label>
+                    <input name="timezone" value={form.timezone} onChange={onFormChange} />
+                </div>
+                <div className="form-field">
+                    <label>&nbsp;</label>
+                    <button>Добавить</button>
+                </div>
             </form>
         </div>
     );
