@@ -18,7 +18,7 @@ function WatchApp(props) {
     return (
         <div>
             <WatchForm onAdd={handleAdd}/>
-            <WatchList onRemove={handleRemove} watches={watches}/>
+            <WatchList onRemove={handleRemove} watches={watches} />
         </div>
     );
 }

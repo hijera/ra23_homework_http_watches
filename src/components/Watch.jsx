@@ -17,7 +17,8 @@ class Watch extends Component {
         this.minuteAngle = 0;
         this.hourAngle = 0;
         this.name = props.name;
-        this.interval = props.interval;
+        this.intervalTime = props.intervalTime;
+        this.interval =  null;
     }
 
     getTimeArray(date) {
@@ -50,7 +51,7 @@ class Watch extends Component {
     }
 
     componentDidMount() {
-        this.interval = window.setInterval(() => this.updateDate(), this.interval);
+        this.interval = window.setInterval(() => this.updateDate(), this.intervalTime);
     }
 
     componentWillUnmount() {
@@ -85,13 +86,13 @@ class Watch extends Component {
 }
 
 Watch.defaultProps = {
-    interval: 100,
+    intervalTime: 100,
     offset: 0,
     name: 'Unknown'
 };
 
 Watch.propTypes = {
-    interval: PropTypes.number,
+    intervalTime: PropTypes.number,
     offset: PropTypes.number,
     name: PropTypes.string
 };
