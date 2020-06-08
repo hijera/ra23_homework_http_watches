@@ -4,7 +4,8 @@ import WatchList from "./WatchList";
 import WatchForm from "./WatchForm";
 import WatchModel from "../models/WatchModel";
 
-WatchApp.propTypes = {};
+WatchApp.propTypes = {
+};
 
 function WatchApp(props) {
     const [watches, setWatches] = useState([]);
