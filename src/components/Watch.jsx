@@ -1,24 +1,19 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
+const getMSSector = 360.0 / 1000;
+const getSecondSector = 360.0 / 60;
+const getMinuteSector = 360.0 / 60;
+const getHourSector = 360.0 / 12;
+
 class Watch extends Component {
     constructor(props) {
         super(props);
-        this.offset = props.offset;
-        this.date = this.genNewDate(this.offset);
-        this.getMSSector = 360.0 / 1000;
-        this.getSecondSector = 360.0 / 60;
-        this.getMinuteSector = 360.0 / 60;
-        this.getHourSector = 360.0 / 12;
-        this.state = {
-            date: this.genNewDate(this.offset),
-        };
-        this.secondAngle = 0;
-        this.minuteAngle = 0;
-        this.hourAngle = 0;
-        this.name = props.name;
-        this.intervalTime = props.intervalTime;
+
         this.interval =  null;
+        this.state = {
+            date: this.genNewDate(this.props.offset),
+        };
     }
 
     getTimeArray(date) {
@@ -38,25 +33,33 @@ class Watch extends Component {
     }
 
     updateDate() {
-        const date = this.genNewDate(this.offset);
-        const time = this.getTimeArray(date);
-        const ms = time.ms;
-        /* Производим сглаживание движения стрелок путем прибавления миллисекунд к секундам, секунд к минутам, минут к часам*/
-        this.secondAngle = (this.getSecondSector * time.seconds) + this.getSecondSector * (this.getMSSector * ms) / 360.0;
-        this.minuteAngle = (this.getMinuteSector * time.minutes) + this.getMinuteSector * this.secondAngle / 360.0;
-        this.hourAngle = (this.getHourSector * time.hours) + this.getHourSector * this.minuteAngle / 360.0;
-        if (this.state.date !== date)
-            this.setState({date: date})
+        const date = this.genNewDate(this.props.offset);
+        if (date!==this.state.date)
+            this.setState({date: date});
 
     }
 
+    getAngles()
+    {
+        const time = this.getTimeArray(this.state.date);
+        const ms = time.ms;
+
+        /* Производим сглаживание движения стрелок путем прибавления миллисекунд к секундам, секунд к минутам, минут к часам*/
+        const secondAngle = (getSecondSector * time.seconds) + getSecondSector * (getMSSector * ms) / 360.0;
+        const minuteAngle = (getMinuteSector * time.minutes) + getMinuteSector * secondAngle / 360.0;
+        const hourAngle = (getHourSector * time.hours) + getHourSector * minuteAngle / 360.0;
+        return {second:secondAngle,minute:minuteAngle,hour:hourAngle};
+    }
+
     componentDidMount() {
-        this.interval = window.setInterval(() => this.updateDate(), this.intervalTime);
+        this.updateDate();
+        this.interval = window.setInterval(() => this.updateDate(), this.props.intervalTime);
     }
 
     componentWillUnmount() {
         window.clearInterval(this.interval);
     }
+
 
     getStyle(param) {
         return {transform: 'rotate(' + param + 'deg)'};
@@ -65,7 +68,7 @@ class Watch extends Component {
     render() {
         return (
             <div className={"watch-element"}>
-                <h3>{this.name}</h3>
+                <h3>{this.props.name}</h3>
                 <div className="watch">
                     <div className="watch-face">
                         <div className="watch-face-outline">
@@ -74,9 +77,9 @@ class Watch extends Component {
                             <div className="watch-face-centre-inner"/>
                         </div>
                         <div className="watch-face-hands">
-                            <div className="watch-face-hand hour" style={this.getStyle(this.hourAngle)}/>
-                            <div className="watch-face-hand minute" style={this.getStyle(this.minuteAngle)}/>
-                            <div className="watch-face-hand second" style={this.getStyle(this.secondAngle)}/>
+                            <div className="watch-face-hand hour" style={this.getStyle(this.getAngles().hour)}/>
+                            <div className="watch-face-hand minute" style={this.getStyle(this.getAngles().minute)}/>
+                            <div className="watch-face-hand second" style={this.getStyle(this.getAngles().second)}/>
                         </div>
                     </div>
                 </div>
